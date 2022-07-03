@@ -19,8 +19,9 @@ def detect():
     img = model(source)
     a = urlparse(source)
     filename = os.path.basename(a.path)
+    filename = filename.split('.')[0]
     img.save(save_dir='outputs')
-    return send_file(f"outputs/{filename}", mimetype='image/jpeg')
+    return send_file(f"outputs/{filename}.jpg", mimetype='image/jpeg')
     
     
 
