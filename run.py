@@ -13,7 +13,7 @@ def index():
 
 @app.route('/detect', methods=["POST"])
 def detect():
-    source = request.files["image"]
+    source = request.json["image"]
     img = model(source)
     return send_file(img, mimetype='image/jpeg')
     
