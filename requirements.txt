@@ -1,0 +1,13 @@
+numpy
+opencv-python
+Pillow
+PyYAML
+requests
+torch
+torchvision
+tqdm
+protobuf
+seaborn
+pandas
+tensorboard
+flask
