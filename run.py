@@ -1,6 +1,7 @@
+import os
 from flask import Flask, request, jsonify, send_file
 import torch
-
+from urllib.parse import urlparse
 
 model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
@@ -13,9 +14,13 @@ def index():
 
 @app.route('/detect', methods=["POST"])
 def detect():
-    source = request.json["image"]
+    params = request.get_json()
+    source = params["image"]
     img = model(source)
-    return send_file(img, mimetype='image/jpeg')
+    a = urlparse(source)
+    filename = os.path.basename(a.path)
+    img.save(save_dir='outputs')
+    return send_file(f"outputs/{filename}", mimetype='image/jpeg')
     
     
 
